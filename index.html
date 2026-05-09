@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEBATE AI COACH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #001f3f; /* כחול כהה עמוק */
+            --accent-blue: #0074D9;
+            --turquoise: #39CCCC;
+            --text-light: #f8f9fa;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-subtle: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--turquoise);
+            letter-spacing: 4px;
+        }
+
+        .main-layout {
+            display: flex;
+            max-width: 1200px;
+            width: 95%;
+            gap: 30px;
+            margin-top: 20px;
+            flex: 1; /* דוחף את הפוטר למטה */
+        }
+
+        /* תיבת עקרונות קבועה */
+        .principles-sidebar {
+            flex: 1;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-right: 4px solid var(--turquoise);
+            height: fit-content;
+        }
+
+        .principles-sidebar h3 {
+            color: var(--turquoise);
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 10px;
+        }
+
+        .principles-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .principles-sidebar li {
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .principles-sidebar b {
+            display: block;
+            color: var(--turquoise);
+            font-weight: 700;
+        }
+
+        /* אזור הדיבייט המרכזי */
+        .debate-content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* אייקון שני פרצופים מדברים */
+        .talk-icon {
+            margin-bottom: 20px;
+            fill: var(--turquoise);
+        }
+
+        .mic-container {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .mic-circle {
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--turquoise);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .mic-circle.active {
+            background: var(--turquoise);
+            box-shadow: 0 0 20px var(--turquoise);
+        }
+
+        .status-text {
+            color: var(--turquoise);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            min-height: 1.5em;
+        }
+
+        #response-text {
+            background: var(--card-bg);
+            width: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-blue);
+            min-height: 150px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* רשימת נושאים */
+        .topics-grid {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .topic-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-right: 4px solid var(--turquoise);
+            padding: 15px;
+            border-radius: 4px;
+            text-align: right;
+        }
+
+        .topic-title {
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .topic-summary {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #ccc;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--border-subtle);
+        }
+
+        .select-btn {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--turquoise);
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .end-btn {
+            margin-top: 40px;
+            background: #ff4136;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 40px;
+        }
+
+        footer {
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+            color: #888;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>DEBATE AI COACH</h1>
+</header>
+
+<div class="main-layout">
+    <div class="principles-sidebar">
+        <h3>העקרונות המנצחים</h3>
+        <ul>
+            <li><b>שורש ההתנגדות:</b> התייחס למהות הטענה שלי.</li>
+            <li><b>תקשורת אפקטיבית:</b> נסח מחשבות בצורה קוהרנטית ותמציתית.</li>
+            <li><b>ראש פתוח:</b> נסה לשקול את נקודת המבט שאני מציג.</li>
+        </ul>
+    </div>
+
+    <div class="debate-content">
+        <svg class="talk-icon" width="80" height="80" viewBox="0 0 24 24">
+            <path d="M9 13a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm0-4a1 1 0 1 1-1 1 1 1 0 0 1 1-1zm6 4a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm0-4a1 1 0 1 1-1 1 1 1 0 0 1 1-1zm-9 9a5 5 0 0 0 5-5H7a5 5 0 0 0-1 0zm12-5h-4a5 5 0 0 0 5 5zM2 12A10 10 0 1 1 12 22 10 10 0 0 1 2 12z" opacity=".2"/>
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-5-8a2 2 0 1 0-2-2 2 2 0 0 0 2 2zm10 0a2 2 0 1 0-2-2 2 2 0 0 0 2 2zM7 16a5 5 0 0 1 10 0z"/>
+        </svg>
+
+        <div class="mic-container" id="micBtn" title="לחץ להפעלת הדיבור">
+            <div class="mic-circle">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                    <line x1="12" y1="19" x2="12" y2="23"></line>
+                </svg>
+            </div>
+        </div>
+
+        <div class="status-text" id="status">בחר נושא כדי להתחיל</div>
+
+        <div id="response-text">התגובות של המאמן יופיעו כאן...</div>
+
+        <div class="topics-grid">
+            <div class="topic-box">
+                <span class="topic-title" onclick="toggleSummary(this)">בינה מלאכותית במקום בגרויות</span>
+                <div class="topic-summary">האם מערכות AI יכולות להחליף את המבחנים המסורתיים ולהעריך ידע בצורה הוגנת יותר?</div>
+                <span class="select-btn" onclick="selectTopic('בינה מלאכותית במקום בגרויות')">לבחור</span>
+            </div>
+            <div class="topic-box">
+                <span class="topic-title" onclick="toggleSummary(this)">הורדת גיל הבחירה ל-16</span>
+                <div class="topic-summary">האם בני נוער בגיל 16 בשלים מספיק לקבל החלטות גורליות על עתיד המדינה?</div>
+                <span class="select-btn" onclick="selectTopic('הורדת גיל הבחירה ל-16')">לבחור</span>
+            </div>
+            <div class="topic-box">
+                <span class="topic-title" onclick="toggleSummary(this)">יום בשבוע ללא מסכים</span>
+                <div class="topic-summary">האם חקיקה או נורמה חברתית ליום ללא טכנולוגיה תעזור לבריאות הנפש?</div>
+                <span class="select-btn" onclick="selectTopic('יום בשבוע ללא מסכים')">לבחור</span>
+            </div>
+            <div class="topic-box">
+                <span class="topic-title" onclick="toggleSummary(this)">לימודים במטאוורס</span>
+                <div class="topic-summary">האם כיתות וירטואליות בתלת-ממד הן עתיד החינוך או פגיעה ביחסים אנושיים?</div>
+                <span class="select-btn" onclick="selectTopic('לימודים במטאוורס')">לבחור</span>
+            </div>
+            <div class="topic-box">
+                <span class="topic-title" onclick="toggleSummary(this)">חובת שירות לאומי לכולם</span>
+                <div class="topic-summary">האם כל אזרח חייב לתרום שנתיים למדינה, ללא קשר לרקע דתי או לאומי?</div>
+                <span class="select-btn" onclick="selectTopic('חובת שירות לאומי לכולם')">לבחור</span>
+            </div>
+        </div>
+
+        <button class="end-btn" onclick="endDebate()">סיים דיבייט</button>
+    </div>
+</div>
+
+<footer>
+    פותח ע"י רוזי נעמני וריקי נחום
+</footer>
+
+<script type="module">
+    import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+    const API_KEY = 'AIzaSyAfCphaMtKVAfWNuztpR7dHSB57u0Llno4'; 
+    const genAI = new GoogleGenerativeAI(API_KEY);
+    const model = genAI.getGenerativeModel({ 
+        model: "gemini-1.5-flash", 
+        systemInstruction: "אתה 'Debate Coach AI'. אמץ תמיד עמדה מנוגדת למשתמש. בנה טענת נגד חזקה עד 150 מילים. בסוף סבב 6, תן ציון ומשוב לפי מחוון פדגוגי."
+    });
+
+    let chat = model.startChat({ history: [] });
+    const statusText = document.getElementById('status');
+    const responseArea = document.getElementById('response-text');
+    const micBtn = document.getElementById('micBtn');
+
+    window.toggleSummary = (el) => {
+        const summary = el.nextElementSibling;
+        summary.style.display = (summary.style.display === 'block') ? 'none' : 'block';
+    };
+
+    window.selectTopic = async (topic) => {
+        responseArea.innerText = "הנושא נבחר: " + topic + ". המאמן מכין פתיחה...";
+        statusText.innerText = "מעבד...";
+        try {
+            const result = await chat.sendMessage("בוא נתחיל דיבייט על: " + topic + ". הצג את עמדתך המנוגדת.");
+            const response = await result.response;
+            responseArea.innerText = response.text();
+            speak(response.text());
+            statusText.innerText = "המאמן סיים. תורך לענות (לחצי על המיקרופון)";
+        } catch (e) {
+            statusText.innerText = "שגיאה בחיבור למאמן.";
+        }
+    };
+
+    let recognition;
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.lang = 'he-IL';
+        
+        recognition.onresult = async (event) => {
+            const userInput = event.results[0][0].transcript;
+            statusText.innerText = "שמעתי: " + userInput + ". מעבד...";
+            micBtn.querySelector('.mic-circle').classList.remove('active');
+            
+            try {
+                const result = await chat.sendMessage(userInput);
+                const response = await result.response;
+                responseArea.innerText = response.text();
+                speak(response.text());
+                statusText.innerText = "תורך להגיב...";
+            } catch (e) {
+                statusText.innerText = "שגיאה בעיבוד הטיעון.";
+            }
+        };
+    }
+
+    micBtn.addEventListener('click', () => {
+        recognition.start();
+        micBtn.querySelector('.mic-circle').classList.add('active');
+        statusText.innerText = "מקשיב...";
+    });
+
+    function speak(text) {
+        const utterance = new window.SpeechSynthesisUtterance(text);
+        utterance.lang = 'he-IL';
+        window.speechSynthesis.speak(utterance);
+    }
+
+    window.endDebate = () => {
+        location.reload();
+    };
+
+</script>
+</body>
+</html>
