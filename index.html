@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debate Coach AI | אימון אישי</title>
+    <style>
+        :root {
+            --bg-color: #faf8f5;
+            --accent-color: #8c7851;
+            --text-color: #4a4a4a;
+            --card-bg: #ffffff;
+            --border-color: #e0d7c6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            background: #fff;
+        }
+
+        h1 {
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin: 0;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .mic-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
+            cursor: pointer;
+        }
+
+        .mic-circle {
+            width: 100%;
+            height: 100%;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .mic-circle.active {
+            border-color: #e67e22;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(230, 126, 34, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 126, 34, 0); }
+        }
+
+        .status-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            height: 1.5em;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .topic-card {
+            background: var(--card-bg);
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .topic-card:hover {
+            background: #fdfcfb;
+            border-color: var(--accent-color);
+        }
+
+        #response-text {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            min-height: 100px;
+            text-align: right;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>DEBATE COACH AI</h1>
+</header>
+
+<div class="container">
+    <div class="mic-container" id="micBtn">
+        <div class="mic-circle">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                <line x1="12" y1="19" x2="12" y2="23"></line>
+                <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+        </div>
+    </div>
+
+    <div class="status-text" id="status">לחצי על המיקרופון כדי להתחיל</div>
+
+    <div id="response-text">התגובות של המאמן יופיעו כאן...</div>
+
+    <div class="topics-grid">
+        <div class="topic-card">בינה מלאכותית במקום בגרויות</div>
+        <div class="topic-card">הורדת גיל הבחירה ל-16</div>
+        <div class="topic-card">יום בשבוע ללא מסכים</div>
+        <div class="topic-card">לימודים במטאוורס</div>
+        <div class="topic-card">חובת שירות לאומי לכולם</div>
+    </div>
+</div>
+
+<script type="module">
+    import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+    const API_KEY = 'AIzaSyBuVEEE5JLA48o6AMvM1JAy-TB2reAfoqw';
+    const genAI = new GoogleGenerativeAI(API_KEY);
+
+    // הנחיות המערכת המאוחדות שלנו
+    const model = genAI.getGenerativeModel({ 
+        model: "gemini-1.5-flash",
+        systemInstruction: "אתה 'Debate Coach AI' – פרטנר לאימון אישי ב'דו-קרב אינטלקטואלי'. אמץ תמיד את העמדה המנוגדת למשתמש. זהה את שורש ההתנגדות ובנה טענת נגד חזקה עד 150 מילים. בסוף סבב 6, תן ציון ומשוב לפי המחוון הפדגוגי."
+    });
+
+    const micBtn = document.getElementById('micBtn');
+    const statusText = document.getElementById('status');
+    const responseArea = document.getElementById('response-text');
+
+    let recognition;
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.lang = 'he-IL';
+    }
+
+    let chat = model.startChat({ history: [] });
+
+    micBtn.addEventListener('click', async () => {
+        if (!recognition) return alert("הדפדפן לא תומך בזיהוי קולי");
+        
+        micBtn.querySelector('.mic-circle').classList.add('active');
+        statusText.innerText = "מקשיב...";
+        recognition.start();
+    });
+
+    recognition.onresult = async (event) => {
+        const userInput = event.results[0][0].transcript;
+        statusText.innerText = "מעבד את הטיעון...";
+        micBtn.querySelector('.mic-circle').classList.remove('active');
+
+        try {
+            const result = await chat.sendMessage(userInput);
+            const response = await result.response;
+            responseArea.innerText = response.text();
+            
+            // הקראת התגובה בקול
+            const utterance = new window.SpeechSynthesisUtterance(response.text());
+            utterance.lang = 'he-IL';
+            window.speechSynthesis.speak(utterance);
+            
+            statusText.innerText = "לחצי שוב כדי להגיב";
+        } catch (error) {
+            statusText.innerText = "שגיאה בחיבור למאמן";
+        }
+    };
+</script>
+
+</body>
+</html>
