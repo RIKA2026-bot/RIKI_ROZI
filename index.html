@@ -154,12 +154,13 @@
 <script type="module">
     import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-    const API_KEY = 'AIzaSyBuVEEE5JLA48o6AMvM1JAy-TB2reAfoqw';
+    // המפתח החדש שלך מעודכן כאן
+    const API_KEY = 'AIzaSyAfCphaMtKVAfWNuztpR7dHSB57u0Llno4'; 
     const genAI = new GoogleGenerativeAI(API_KEY);
 
-    // הנחיות המערכת המאוחדות שלנו
+    // תיקון שם המודל לגרסה היציבה ביותר
     const model = genAI.getGenerativeModel({ 
-       model: "models/gemini-1.5-flash",
+        model: "gemini-1.5-flash", 
         systemInstruction: "אתה 'Debate Coach AI' – פרטנר לאימון אישי ב'דו-קרב אינטלקטואלי'. אמץ תמיד את העמדה המנוגדת למשתמש. זהה את שורש ההתנגדות ובנה טענת נגד חזקה עד 150 מילים. בסוף סבב 6, תן ציון ומשוב לפי המחוון הפדגוגי."
     });
 
@@ -194,14 +195,14 @@
             const response = await result.response;
             responseArea.innerText = response.text();
             
-            // הקראת התגובה בקול
             const utterance = new window.SpeechSynthesisUtterance(response.text());
             utterance.lang = 'he-IL';
             window.speechSynthesis.speak(utterance);
             
             statusText.innerText = "לחצי שוב כדי להגיב";
         } catch (error) {
-            statusText.innerText = "שגיאה בחיבור למאמן";
+            statusText.innerText = "שגיאה בחיבור למאמן: " + error.message;
+            console.error(error);
         }
     };
 </script>
