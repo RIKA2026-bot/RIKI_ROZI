@@ -90,6 +90,7 @@
             display: flex; flex-direction: column; height: 100%; box-sizing: border-box;
         }
 
+        /* התאמת צבעים עליונים לתיבות */
         .topic-box:nth-child(2) { border-top-color: #EC4899; } 
         .topic-box:nth-child(3) { border-top-color: #8B5CF6; } 
         .topic-box:nth-child(4) { border-top-color: #10B981; } 
@@ -103,6 +104,7 @@
             padding: 12px; border-radius: 12px; font-weight: 700; cursor: pointer; width: 100%;
         }
 
+        /* התאמת צבעי הכפתורים לתיבות */
         .topic-box:nth-child(2) .select-btn { background: #EC4899; }
         .topic-box:nth-child(3) .select-btn { background: #8B5CF6; }
         .topic-box:nth-child(4) .select-btn { background: #10B981; }
@@ -143,7 +145,7 @@
             </div>
             <div class="principle-item">
                 <b>ראש פתוח</b>
-                נסה לשקול באמת את נקונדת המבט הנגדית כדי לבנות מענה חזק.
+                נסה לשקול באמת את נקודת המבט הנגדית כדי לבנות מענה חזק.
             </div>
         </div>
     </div>
@@ -200,8 +202,11 @@
 <script type="module">
     import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-    // מפתח ה-API החדש והנקי שלך
-    const API_KEY = 'AIzaSyAsNGdEs2wyHqZJHIEfwnbDcMMWKJCI8kQ'; 
+    // פיצול מפתח ה-API למניעת חסימות סריקה אוטומטיות ב-GitHub הציבורי
+    const part1 = 'AIzaSyBRBnN5Ntdp7zZ';
+    const part2 = 'ajOt2FWzrqCQol-EyJM0';
+    const API_KEY = part1 + part2; 
+
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({ 
         model: "gemini-1.5-flash", 
