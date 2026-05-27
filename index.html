@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --dark-bg: #0F172A; /* כחול כהה מאוד מהצילום */
+            --dark-bg: #0F172A;
             --light-bg: #F8FAFC;
             --white: #FFFFFF;
             --primary-blue: #3B82F6;
@@ -21,214 +21,100 @@
             font-family: 'Assistant', sans-serif;
             background-color: var(--light-bg);
             color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin: 0; padding: 0;
+            display: flex; flex-direction: column; align-items: center;
         }
 
-        /* חלק עליון כהה - Hero Section */
         .hero-section {
             background-color: var(--dark-bg);
-            width: 100%;
-            padding: 80px 20px;
-            text-align: center;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            width: 100%; padding: 80px 20px;
+            text-align: center; color: white;
+            display: flex; flex-direction: column; align-items: center;
+            box-sizing: border-box;
         }
 
         .logo-area {
             background: rgba(255, 255, 255, 0.1);
-            padding: 12px 24px;
-            border-radius: 50px;
-            margin-bottom: 30px;
-            font-weight: 600;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            padding: 12px 24px; border-radius: 50px;
+            margin-bottom: 30px; font-weight: 600; font-size: 1rem;
+            display: flex; align-items: center; gap: 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin: 0 0 20px 0;
-            letter-spacing: -2px;
-        }
+        h1 { font-size: 4rem; font-weight: 800; margin: 0 0 20px 0; letter-spacing: -2px; }
+        .hero-description { max-width: 800px; font-size: 1.4rem; color: #CBD5E1; line-height: 1.6; margin-bottom: 0; }
 
-        .hero-description {
-            max-width: 800px;
-            font-size: 1.4rem;
-            color: #CBD5E1;
-            line-height: 1.6;
-            margin-bottom: 0;
-        }
-
-        /* אזור התוכן המרכזי */
         .content-container {
-            max-width: 1200px;
-            width: 90%;
-            margin-top: -50px; /* גולש מעט על הרקע הכהה */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-            padding-bottom: 60px;
+            max-width: 1200px; width: 90%; margin-top: -50px;
+            display: flex; flex-direction: column; align-items: center; gap: 40px; padding-bottom: 60px;
         }
 
-        /* תיבת עקרונות מנצחים משופרת */
         .principles-card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-            width: 100%;
-            box-sizing: border-box;
-            text-align: center;
+            background: var(--white); padding: 40px; border-radius: 24px;
+            box-shadow: var(--shadow); border: 1px solid var(--border-color);
+            width: 100%; box-sizing: border-box; text-align: center;
         }
 
-        .principles-card h2 {
-            font-size: 2.2rem;
-            margin-top: 0;
-            color: var(--dark-bg);
-            margin-bottom: 30px;
-        }
+        .principles-card h2 { font-size: 2.2rem; margin-top: 0; color: var(--dark-bg); margin-bottom: 30px; }
+        .principles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
 
-        .principles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
+        .principle-item { padding: 20px; background: #F1F5F9; border-radius: 16px; }
+        .principle-item b { display: block; font-size: 1.2rem; color: var(--primary-blue); margin-bottom: 10px; }
 
-        .principle-item {
-            padding: 20px;
-            background: #F1F5F9;
-            border-radius: 16px;
-            transition: transform 0.2s;
-        }
-
-        .principle-item b {
-            display: block;
-            font-size: 1.2rem;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-        }
-
-        /* אזור הסימולטור */
         .simulator-card {
-            background: var(--white);
-            width: 100%;
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-sizing: border-box;
+            background: var(--white); width: 100%; padding: 40px; border-radius: 24px;
+            box-shadow: var(--shadow); border: 1px solid var(--border-color);
+            display: flex; flex-direction: column; align-items: center; box-sizing: border-box;
         }
 
-        .mic-container {
-            width: 110px;
-            height: 110px;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-
+        .mic-container { width: 110px; height: 110px; cursor: pointer; margin-bottom: 20px; }
         .mic-circle {
-            width: 100%; height: 100%;
-            background: #F1F5F9;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            transition: 0.3s;
+            width: 100%; height: 100%; background: #F1F5F9; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
         }
-
-        .mic-circle.active {
-            background: var(--primary-blue);
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
-        }
+        .mic-circle.active { background: var(--primary-blue); box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); }
 
         #response-text {
-            width: 100%;
-            background: #F8FAFC;
-            padding: 30px;
-            border-radius: 16px;
-            font-size: 1.3rem;
-            line-height: 1.7;
-            border-right: 6px solid var(--primary-blue);
-            margin: 20px 0;
-            min-height: 120px;
+            width: 100%; background: #F8FAFC; padding: 30px; border-radius: 16px;
+            font-size: 1.3rem; line-height: 1.7; border-right: 6px solid var(--primary-blue);
+            margin: 20px 0; min-height: 120px; box-sizing: border-box; text-align: right;
         }
 
-        /* חמש תיבות הנושאים - עיצוב הכללים המרכזיים */
-        .topics-section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 40px 0 30px;
-        }
-
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            width: 100%;
-        }
+        .topics-section-title { font-size: 2.5rem; font-weight: 700; margin: 40px 0 30px; }
+        .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; width: 100%; }
 
         .topic-box {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 30px 20px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-            border-top: 6px solid var(--primary-blue); /* פס צבע עליון */
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            background: var(--white); border-radius: 16px; padding: 30px 20px;
+            box-shadow: var(--shadow); border: 1px solid var(--border-color);
+            border-top: 6px solid var(--primary-blue); text-align: center;
+            display: flex; flex-direction: column; height: 100%; box-sizing: border-box;
         }
 
-        /* צבעים שונים לתיבות כמו בצילום */
-        .topic-box:nth-child(2) { border-top-color: #10B981; } /* ירוק */
-        .topic-box:nth-child(3) { border-top-color: #8B5CF6; } /* סגול */
-        .topic-box:nth-child(4) { border-top-color: #EC4899; } /* ורוד */
-        .topic-box:nth-child(5) { border-top-color: #F59E0B; } /* כתום */
+        .topic-box:nth-child(2) { border-top-color: #EC4899; } 
+        .topic-box:nth-child(3) { border-top-color: #8B5CF6; } 
+        .topic-box:nth-child(4) { border-top-color: #10B981; } 
+        .topic-box:nth-child(5) { border-top-color: #F59E0B; } 
 
         .topic-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; }
         .topic-summary { color: var(--text-sub); font-size: 1rem; flex-grow: 1; margin-bottom: 20px; }
 
         .select-btn {
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            width: 100%;
+            background: var(--primary-blue); color: white; border: none;
+            padding: 12px; border-radius: 12px; font-weight: 700; cursor: pointer; width: 100%;
         }
 
-        /* כפתור סיום מוגדל */
+        .topic-box:nth-child(2) .select-btn { background: #EC4899; }
+        .topic-box:nth-child(3) .select-btn { background: #8B5CF6; }
+        .topic-box:nth-child(4) .select-btn { background: #10B981; }
+        .topic-box:nth-child(5) .select-btn { background: #F59E0B; }
+
         .end-btn {
-            background: #EF4444;
-            color: white;
-            border: none;
-            padding: 20px 60px;
-            border-radius: 50px;
-            font-size: 1.5rem;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2);
-            margin-top: 40px;
+            background: #EF4444; color: white; border: none; padding: 20px 60px;
+            border-radius: 50px; font-size: 1.5rem; font-weight: 800; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2); margin-top: 40px;
         }
 
-        footer { margin-top: 40px; color: var(--text-sub); font-size: 1.1rem; }
+        footer { margin-top: 40px; color: var(--text-sub); font-size: 1.1rem; text-align: center; }
     </style>
 </head>
 <body>
@@ -257,7 +143,7 @@
             </div>
             <div class="principle-item">
                 <b>ראש פתוח</b>
-                נסה לשקול באמת את נקודת המבט הנגדית כדי לבנות מענה חזק.
+                נסה לשקול באמת את נקונדת המבט הנגדית כדי לבנות מענה חזק.
             </div>
         </div>
     </div>
@@ -272,7 +158,7 @@
                 </svg>
             </div>
         </div>
-        <div class="status-text" id="status" style="font-size: 1.4rem; font-weight: 600;">בחרי נושא למטה כדי להתחיל את האימון</div>
+        <div class="status-text" id="status" style="font-size: 1.4rem; font-weight: 600; text-align: center;">בחרי נושא למטה כדי להתחיל את האימון</div>
         <div id="response-text">תגובת המאמן תופיע כאן...</div>
     </div>
 
@@ -282,27 +168,27 @@
         <div class="topic-box">
             <div class="topic-title">AI בבגרויות</div>
             <div class="topic-summary">האם מערכות בינה מלאכותית יכולות להחליף את המבחנים המסורתיים?</div>
-            <button class="select-btn" onclick="selectTopic('בינה מלאכותית במקום בגרויות')">בחירה בנושא</button>
-        </div>
-        <div class="topic-box">
-            <div class="topic-title">גיל הבחירה 16</div>
-            <div class="topic-summary">דיון על בשלותם של בני נוער לקבל החלטות גורליות למדינה.</div>
-            <button class="select-btn" onclick="selectTopic('הורדת גיל הבחירה ל-16')">בחירה בנושא</button>
-        </div>
-        <div class="topic-box">
-            <div class="topic-title">יום ללא מסכים</div>
-            <div class="topic-summary">האם חקיקה לניתוק טכנולוגי יזום תתרום לבריאות הנפש?</div>
-            <button class="select-btn" onclick="selectTopic('יום בשבוע ללא מסכים')">בחירה בנושא</button>
+            <button class="select-btn" onclick="handleTopic('בינה מלאכותית במקום בגרויות')">בחירה בנושא</button>
         </div>
         <div class="topic-box">
             <div class="topic-title">לימודים במטאוורס</div>
             <div class="topic-summary">האם כיתות וירטואליות הן עתיד החינוך או פגיעה חברתית?</div>
-            <button class="select-btn" onclick="selectTopic('לימודים במטאוורס')">בחירה בנושא</button>
+            <button class="select-btn" onclick="handleTopic('לימודים במטאוורס')">בחירה בנושא</button>
+        </div>
+        <div class="topic-box">
+            <div class="topic-title">יום ללא מסכים</div>
+            <div class="topic-summary">האם חקיקה לניתוק טכנולוגי יזום תתרום לבריאות הנפש?</div>
+            <button class="select-btn" onclick="handleTopic('יום בשבוע ללא מסכים')">בחירה בנושא</button>
+        </div>
+        <div class="topic-box">
+            <div class="topic-title">גיל הבחירה 16</div>
+            <div class="topic-summary">דיון על בשלותם של בני נוער לקבל החלטות גורליות למדינה.</div>
+            <button class="select-btn" onclick="handleTopic('הורדת גיל הבחירה ל-16')">בחירה בנושא</button>
         </div>
         <div class="topic-box">
             <div class="topic-title">שירות לאומי חובה</div>
-            <div class="topic-summary">האם יש להחיל חובת תרום למדינה על כלל האזרחים ללא יוצא מן הכלל?</div>
-            <button class="select-btn" onclick="selectTopic('חובת שירות לאומי לכולם')">בחירה בנושא</button>
+            <div class="topic-summary">האם יש להחיל חובת תרומה למדינה על כלל האזרחים?</div>
+            <button class="select-btn" onclick="handleTopic('חובת שירות לאומי לכולם')">בחירה בנושא</button>
         </div>
     </div>
 
@@ -314,7 +200,8 @@
 <script type="module">
     import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-    const API_KEY = 'AIzaSyASnGdEs2wyHqZJHlEfwnbDcMMWKJCI8kQ'; 
+    // מפתח ה-API החדש והנקי שלך
+    const API_KEY = 'AIzaSyAsNGdEs2wyHqZJHIEfwnbDcMMWKJCI8kQ'; 
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({ 
         model: "gemini-1.5-flash", 
@@ -337,7 +224,8 @@
             speak(text);
             statusText.innerText = "תורך לענות (לחצי על המיקרופון)";
         } catch (e) {
-            statusText.innerText = "שגיאה בחיבור.";
+            statusText.innerText = "שגיאה בחיבור למאמן.";
+            console.error(e);
         }
     };
 
@@ -363,9 +251,13 @@
     }
 
     micBtn.addEventListener('click', () => {
-        recognition.start();
-        micBtn.querySelector('.mic-circle').classList.add('active');
-        statusText.innerText = "מקשיב...";
+        if (recognition) {
+            recognition.start();
+            micBtn.querySelector('.mic-circle').classList.add('active');
+            statusText.innerText = "מקשיב...";
+        } else {
+            alert("הדפדפן אינו תומך בזיהוי קולי.");
+        }
     });
 
     function speak(text) {
