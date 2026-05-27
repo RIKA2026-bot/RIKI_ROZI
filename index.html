@@ -326,7 +326,7 @@
     const responseArea = document.getElementById('response-text');
     const micBtn = document.getElementById('micBtn');
 
-    window.selectTopic = async (topic) => {
+    window.handleTopic = async (topic) => {
         responseArea.innerText = "הנושא נבחר: " + topic + ". המאמן מכין פתיחה...";
         statusText.innerText = "המאמן חושב...";
         try {
